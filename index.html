@@ -45,6 +45,39 @@ img {
     pointer-events: none;
 }
 
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+        }
+
+        .sound-button {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s ease;
+    z-index: 10;
+}
+
+.sound-button:hover {
+    background: rgba(245,176,66,0.9);
+    transform: scale(1.1);
+}
+
 </style></noscript>
     <style>
         html:not(.aos-ready) [data-aos] { opacity: 1 !important; transform: none !important; }
@@ -2629,10 +2662,24 @@ img {
             </div>
             <div class="about-grid">
                 <div class="about-image" data-aos="fade-right">
-                    <video class="nosotros-video" autoplay muted loop playsinline controlslist="nodownload">
-    <source src="img/trabajo.mp4" type="video/mp4">
-    Tu navegador no soporta videos HTML5.
-</video> alt="Instalación de un letrero de fachada por Letreros Thunder en Ilo" width="2048" height="1536" loading="lazy" decoding="async" style="object-position: 50% 50%;">
+                    <div class="video-container">
+    <video 
+        id="trabajoVideo"
+        src="img/trabajo.mp4"
+        class="about-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-label="Proceso de instalación de un letrero por Letreros Thunder">
+        Tu navegador no soporta la reproducción de video.
+    </video>
+
+    <button class="sound-button" id="soundButton" type="button" aria-label="Control de sonido">
+    <span id="soundIcon">🔊</span>
+</button>
+</div>
                 </div>
                 <div class="about-content" data-aos="fade-left">
                     <h3>Fabricamos Letras Corpóreas y Letreros Personalizados</h3>
@@ -2675,40 +2722,64 @@ img {
         </div>
     </section>
 
-    <!-- GALLERY SECTION (PROYECTOS) -->
-    <section class="section" id="proyectos">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>Nuestros <span>Proyectos</span></h2>
-                <div class="underline"></div>
-                <p>Conoce algunos de nuestros trabajos realizados en Ilo y la región</p>
-            </div>
-            <div class="gallery-grid">
-                <div class="gallery-item" data-aos="fade-up">
-                    <img src="img/brasador.jpg" alt="Letrero tipo bandera circular 60 cm doble cara" width="1536" height="2048" loading="lazy" decoding="async" style="object-position: 50% 28%;">
-                    <div class="gallery-overlay">
-                        <h3>Letrero Circular 60 cm Doble Cara</h3>
-                        <p>Instalación corporativa tipo bandera</p>
-                    </div>
-                </div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
-                    <img src="img/don-manuel.jpg" alt="Letrero en MDF negro mate con luz indirecta" width="932" height="2048" loading="lazy" decoding="async" style="object-position: 50% 30%;">
-                    <div class="gallery-overlay">
-                        <h3>Letrero en MDF Negro Mate</h3>
-                        <p>Diseño elegante con luz indirecta LED</p>
-                    </div>
-                </div>
-                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
-                    <video class="nosotros-video" autoplay muted loop playsinline controlslist="nodownload">
-    <source src="img/trabajo.mp4" type="video/mp4">
-    Tu navegador no soporta videos HTML5.
-</video> alt="Instalación de letras corpóreas en fachada monocromática" width="2048" height="1536" loading="lazy" decoding="async" style="object-position: 50% 50%;">
-                    <div class="gallery-overlay">
-                        <h3>Fachada Monocromática</h3>
-                        <p>Luz LED indirecta y acabado premium</p>
-                    </div>
+<!-- GALLERY SECTION (PROYECTOS) -->
+<section class="section" id="proyectos">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">
+            <h2>Nuestros <span>Proyectos</span></h2>
+            <div class="underline"></div>
+            <p>Conoce algunos de nuestros trabajos realizados en Ilo y la región</p>
+        </div>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item" data-aos="fade-up">
+                <img src="img/letreros-3d.jpg" 
+                     alt="Letras corpóreas 3D iluminadas para fachada comercial"
+                     width="1536" height="2048"
+                     loading="lazy"
+                     decoding="async"
+                     style="object-position: 50% 28%;">
+
+                <div class="gallery-overlay">
+                    <h3>Letras Corpóreas 3D</h3>
+                    <p>Diseño e instalación de letreros comerciales con acabado premium</p>
                 </div>
             </div>
+
+
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                <img src="img/letreros-luminosos.jpg" 
+                     alt="Letrero luminoso LED personalizado para negocio"
+                     width="932" height="2048"
+                     loading="lazy"
+                     decoding="async"
+                     style="object-position: 50% 30%;">
+
+                <div class="gallery-overlay">
+                    <h3>Letreros Luminosos LED</h3>
+                    <p>Soluciones publicitarias con iluminación de alto impacto visual</p>
+                </div>
+            </div>
+
+
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                <img src="img/neon-flex.jpg" 
+                     alt="Instalación de neón flex decorativo personalizado"
+                     width="2048" height="1536"
+                     loading="lazy"
+                     decoding="async"
+                     style="object-position: 50% 50%;">
+
+                <div class="gallery-overlay">
+                    <h3>Neón Flex Personalizado</h3>
+                    <p>Diseños modernos con iluminación LED para ambientes únicos</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
             <div style="text-align: center; margin-top: 3rem;">
                 <a href="https://wa.me/51978343319?text=Hola%20quiero%20cotizar%20un%20letrero%20similar%20a%20sus%20proyectos" class="btn btn-primary" target="_blank" rel="noopener">
                     <i class="fab fa-whatsapp"></i> Solicitar Proyecto Similar
