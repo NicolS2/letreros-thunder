@@ -2712,14 +2712,14 @@ img {
         muted
         loop
         playsinline
-        preload="metadata"
+        preload="auto"
         aria-label="Proceso de instalación de un letrero por Letreros Thunder">
         Tu navegador no soporta la reproducción de video.
     </video>
 
     <div class="volume-control">
-    <button id="volumeBtn" class="volume-btn" type="button">🔊</button>
-    <input id="volumeRange" type="range" min="0" max="1" step="0.05" value="0">
+    <button id="volumeBtn" class="volume-btn" type="button" aria-label="Activar sonido">🔇</button>
+    <input id="volumeRange" type="range" min="0" max="1" step="0.05" value="0.7">
 </div>
 </div>
                 </div>
@@ -2776,7 +2776,7 @@ img {
         <div class="gallery-grid">
 
             <div class="gallery-item" data-aos="fade-up">
-                <img src="img/letreros-3d.jpg" 
+                <img src="img/letreros-3d.jpeg" 
                      alt="Letras corpóreas 3D iluminadas para fachada comercial"
                      width="1536" height="2048"
                      loading="lazy"
@@ -2791,7 +2791,7 @@ img {
 
 
             <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
-                <img src="img/letreros-luminosos.jpg" 
+                <img src="img/letreros-luminosos.jpeg" 
                      alt="Letrero luminoso LED personalizado para negocio"
                      width="932" height="2048"
                      loading="lazy"
@@ -2806,7 +2806,7 @@ img {
 
 
             <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
-                <img src="img/neon-flex.jpg" 
+                <img src="img/neon-flex.jpeg" 
                      alt="Instalación de neón flex decorativo personalizado"
                      width="2048" height="1536"
                      loading="lazy"
@@ -3889,6 +3889,63 @@ document.addEventListener("dragstart", function(e) {
 /* Evitar selección directa de imágenes */
 document.querySelectorAll("img").forEach(function(img){
     img.setAttribute("draggable", "false");
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+    const videoTrabajo = document.getElementById("trabajoVideo");
+    const volumeBtn = document.getElementById("volumeBtn");
+    const volumeRange = document.getElementById("volumeRange");
+
+    if(!videoTrabajo || !volumeBtn || !volumeRange) return;
+
+    // Inicio permitido por navegador
+    videoTrabajo.muted = true;
+    videoTrabajo.volume = 0.7;
+
+    volumeBtn.addEventListener("click", function(){
+
+        if(videoTrabajo.muted){
+            videoTrabajo.muted = false;
+            videoTrabajo.volume = volumeRange.value || 0.7;
+            volumeBtn.innerHTML = "🔊";
+        }else{
+            videoTrabajo.muted = true;
+            volumeBtn.innerHTML = "🔇";
+        }
+
+        videoTrabajo.play().catch(()=>{});
+    });
+
+
+    volumeRange.addEventListener("input", function(){
+
+        const value = Number(this.value);
+
+        videoTrabajo.volume = value;
+
+        if(value === 0){
+            videoTrabajo.muted = true;
+            volumeBtn.innerHTML = "🔇";
+        }else{
+            videoTrabajo.muted = false;
+            volumeBtn.innerHTML = "🔊";
+        }
+
+        videoTrabajo.play().catch(()=>{});
+    });
+
+
+    videoTrabajo.addEventListener("click", function(){
+        videoTrabajo.muted = false;
+        videoTrabajo.volume = volumeRange.value || 0.7;
+        volumeBtn.innerHTML = "🔊";
+        videoTrabajo.play().catch(()=>{});
+    });
+
 });
 </script>
 
