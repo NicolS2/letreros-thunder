@@ -31,7 +31,21 @@
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <noscript><style>.preloader { display: none !important; } [data-aos] { opacity: 1 !important; transform: none !important; pointer-events: auto !important; }</style></noscript>
+    <noscript><style>.preloader { display: none !important; } [data-aos] { opacity: 1 !important; transform: none !important; pointer-events: auto !important; }
+/* Protección adicional de imágenes */
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+
+.gallery-item img,
+.about-image img,
+.logo-image img,
+.lightbox img {
+    pointer-events: none;
+}
+
+</style></noscript>
     <style>
         html:not(.aos-ready) [data-aos] { opacity: 1 !important; transform: none !important; }
         /* ==========================================================================
@@ -3741,6 +3755,21 @@ document.addEventListener('keydown', function(e){
         e.preventDefault();
     }
 
+});
+</script>
+
+
+<script>
+/* Evitar arrastrar imágenes a otra pestaña */
+document.addEventListener("dragstart", function(e) {
+    if (e.target.tagName === "IMG") {
+        e.preventDefault();
+    }
+});
+
+/* Evitar selección directa de imágenes */
+document.querySelectorAll("img").forEach(function(img){
+    img.setAttribute("draggable", "false");
 });
 </script>
 
